@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
+
+    // точка спавна
+    public Vector3 respawnPosition = new Vector3(-8, 1.4f, -3);
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) //Проверяем, что вошёл игрок
+        {
+            other.transform.position = respawnPosition;
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
