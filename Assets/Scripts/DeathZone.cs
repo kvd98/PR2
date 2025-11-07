@@ -1,7 +1,7 @@
 using UnityEngine;
 public class DeathZone : MonoBehaviour
 {
-    public HealthManager heal1;
+    public HealthManager health;
     // точка спавна
     public Vector3 respawnPosition = new Vector3(-8, 1.4f, -3);
     
@@ -9,8 +9,14 @@ public class DeathZone : MonoBehaviour
     {
         if (other.CompareTag("Player")) //Проверяем, что вошёл игрок
         {
-            heal1.TakeDamage();
-            other.transform.position = respawnPosition;
+            health.TakeDamage();
+            other.transform.position = respawnPosition; //Телепорт
+            Rigidbody rb = other.GetComponent<Rigidbody>();  //Сброс скорости, набраной при падении
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
         }
     }
 
